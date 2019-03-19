@@ -1,0 +1,13 @@
+.cl-aside {
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .nav {
+    .nav-item {
+      .nav-link {
+        color: black;
+      }
+    }
+  }
+}

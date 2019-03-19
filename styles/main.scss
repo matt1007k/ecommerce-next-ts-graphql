@@ -1,0 +1,14 @@
+// Your variable overrides
+$body-bg: #fff;
+$body-color: #111;
+
+// Bootstrap and its default variables
+
+@import "~bootstrap/scss/bootstrap";
+
+@import "./components/header-client";
+@import "./components/aside-client";
+
+@import "./components/animations/slider-horizontal";
+@import "./components/animations/slider-animation";
+@import "./components/animations/slider";

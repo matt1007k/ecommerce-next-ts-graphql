@@ -1,0 +1,18 @@
+.cl-navbar {
+  padding: 30px 2rem;
+  text-transform: uppercase;
+  .navbar-brand {
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+  .navbar-nav {
+    .nav-link {
+      font-size: 0.9rem;
+    }
+    .cart-count {
+      padding: 0.5em;
+      font-size: 15px;
+      font-weight: bold;
+    }
+  }
+}
