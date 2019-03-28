@@ -1,14 +1,13 @@
 import * as React from "react";
 import Link from "next/link";
 import Layout from "../components/Layout/Layout";
-import SliderHome from "../components/animations/SliderHome";
+// import SliderHome from "../components/animations/SliderHome";
 import { Mutation } from "react-apollo";
 import { gql } from "apollo-boost";
 
 const IndexPage: React.FunctionComponent = () => {
   return (
     <Layout title="Home">
-      <SliderHome />
       <p>
         <Link href="/about">
           <a>About</a>

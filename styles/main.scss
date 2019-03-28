@@ -1,8 +1,10 @@
 // Your variable overrides
-$body-bg: #fff;
+$body-bg: rgba(199, 194, 199, 0.133);
 $body-color: #111;
 
 // Bootstrap and its default variables
+
+@import "variables";
 
 @import "~bootstrap/scss/bootstrap";
 
@@ -12,3 +14,5 @@ $body-color: #111;
 @import "./components/animations/slider-horizontal";
 @import "./components/animations/slider-animation";
 @import "./components/animations/slider";
+
+@import "./components/utils/helpers";

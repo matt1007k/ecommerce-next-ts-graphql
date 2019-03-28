@@ -22,24 +22,10 @@ const Layout: React.FunctionComponent<Props> = ({
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
     <HeaderClient />
-    <Container>
-      <Row>
-        <Col md={2}>
-          <AsideClient />
-        </Col>
-        <Col md={10}>{children}</Col>
-      </Row>
-    </Container>
+    <Container>{children}</Container>
     <footer>
       <hr />
       <span>I'm here to stay (Footer)</span>
-      <div
-        style={{
-          color: "red",
-          backgroundImage: "url(/static/images/right-arrow.svg)",
-          height: "60px"
-        }}
-      />
     </footer>
   </div>
 );
