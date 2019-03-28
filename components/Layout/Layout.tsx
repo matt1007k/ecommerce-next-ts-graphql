@@ -5,7 +5,6 @@ import "../../styles/main.scss";
 import HeaderClient from "./HeaderClient";
 
 import { Container, Row, Col } from "reactstrap";
-import AsideClient from "./AsideClient";
 
 type Props = {
   title?: string;
