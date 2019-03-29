@@ -78,6 +78,19 @@ export type User = {
   email: Scalars["String"];
   name: Scalars["String"];
 };
+export type ChangePasswordMutationVariables = {
+  data: ChangePasswordInput;
+};
+
+export type ChangePasswordMutation = { __typename?: "Mutation" } & {
+  changePassword: Maybe<
+    { __typename?: "User" } & Pick<
+      User,
+      "id" | "firstName" | "lastName" | "email" | "name"
+    >
+  >;
+};
+
 export type ConfirmUserMutationVariables = {
   token: Scalars["String"];
 };
@@ -136,6 +149,66 @@ import gql from "graphql-tag";
 import * as React from "react";
 import * as ReactApollo from "react-apollo";
 
+export const ChangePasswordDocument = gql`
+  mutation ChangePassword($data: ChangePasswordInput!) {
+    changePassword(data: $data) {
+      id
+      firstName
+      lastName
+      email
+      name
+    }
+  }
+`;
+
+export class ChangePasswordComponent extends React.Component<
+  Partial<
+    ReactApollo.MutationProps<
+      ChangePasswordMutation,
+      ChangePasswordMutationVariables
+    >
+  >
+> {
+  render() {
+    return (
+      <ReactApollo.Mutation<
+        ChangePasswordMutation,
+        ChangePasswordMutationVariables
+      >
+        mutation={ChangePasswordDocument}
+        {...(this as any)["props"] as any}
+      />
+    );
+  }
+}
+export type ChangePasswordProps<TChildProps = {}> = Partial<
+  ReactApollo.MutateProps<
+    ChangePasswordMutation,
+    ChangePasswordMutationVariables
+  >
+> &
+  TChildProps;
+export type ChangePasswordMutationFn = ReactApollo.MutationFn<
+  ChangePasswordMutation,
+  ChangePasswordMutationVariables
+>;
+export function withChangePassword<TProps, TChildProps = {}>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        ChangePasswordMutation,
+        ChangePasswordMutationVariables,
+        ChangePasswordProps<TChildProps>
+      >
+    | undefined
+) {
+  return ReactApollo.withMutation<
+    TProps,
+    ChangePasswordMutation,
+    ChangePasswordMutationVariables,
+    ChangePasswordProps<TChildProps>
+  >(ChangePasswordDocument, operationOptions);
+}
 export const ConfirmUserDocument = gql`
   mutation ConfirmUser($token: String!) {
     confirmUser(token: $token)
@@ -182,7 +255,7 @@ export function withConfirmUser<TProps, TChildProps = {}>(
   >(ConfirmUserDocument, operationOptions);
 }
 export const ForgotPasswordDocument = gql`
-  mutation forgotPassword($email: String!) {
+  mutation ForgotPassword($email: String!) {
     forgotPassword(email: $email)
   }
 `;

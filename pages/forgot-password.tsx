@@ -17,42 +17,33 @@ import Router from "next/router";
 
 import Layout from "../components/Layout/Layout";
 import BreadcrumPage from "../components/pages/BreadcrumPage";
-import { LoginComponent } from "../generated/apolloComponents";
 import { InputField } from "../components/field/InputField";
+import { ForgotPasswordComponent } from "../generated/apolloComponents";
 
-export default class login extends Component {
+export default class forgotPassword extends Component {
   render() {
     return (
-      <Layout title="Login">
+      <Layout title="Forgot password">
         <BreadcrumPage title="Sign Up" />
         <Row className="h-100 d-flex justify-content-center align-items-center">
           <Col md={6}>
             <Card className="mt-2">
               <CardTitle className="text-center pt-4">
-                <h4>Iniciar sesion</h4>
+                <h4>¿Contraseña olvidada?</h4>
               </CardTitle>
               <CardBody>
-                <LoginComponent>
-                  {login => (
+                <ForgotPasswordComponent>
+                  {forgotPassword => (
                     <Formik
-                      validateOnBlur={false}
-                      validateOnChange={false}
                       initialValues={{
-                        email: "test@mail.com",
-                        password: "123456"
+                        email: "test@mail.com"
                       }}
-                      onSubmit={async (data, { setErrors }) => {
-                        const response = await login({
+                      onSubmit={async data => {
+                        const response = await forgotPassword({
                           variables: data
                         });
                         console.log(response);
-                        if (response && response.data && !response.data.login) {
-                          setErrors({
-                            email: "Email and password incorrect"
-                          });
-                          return;
-                        }
-                        Router.push("/");
+                        Router.push("/change-password");
                       }}
                     >
                       {({ handleSubmit }) => (
@@ -67,37 +58,19 @@ export default class login extends Component {
                               component={InputField}
                             />
                           </FormGroup>
-                          <FormGroup>
-                            <Label for="password">Password</Label>
-                            <Field
-                              type="password"
-                              name="password"
-                              id="password"
-                              placeholder="************"
-                              component={InputField}
-                            />
-                          </FormGroup>
                           <Button color="success" type="submit">
-                            Ingresar
+                            Siguiente
                           </Button>
                         </form>
                       )}
                     </Formik>
                   )}
-                </LoginComponent>
+                </ForgotPasswordComponent>
               </CardBody>
               <CardFooter className="text-center">
-                <div>
-                  No tengo una cuenta?{" "}
-                  <Link href="/register" passHref>
-                    <a>Registrarse</a>
-                  </Link>
-                </div>
-                <div>
-                  <Link href="/forgot-password" passHref>
-                    <a>Olvidaste tu contrasena?</a>
-                  </Link>
-                </div>
+                <Link href="/login" passHref>
+                  <a>Volver al inicio de sesión</a>
+                </Link>
               </CardFooter>
             </Card>
           </Col>
