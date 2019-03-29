@@ -17,7 +17,11 @@ import Router from "next/router";
 
 import Layout from "../components/Layout/Layout";
 import BreadcrumPage from "../components/pages/BreadcrumPage";
-import { LoginComponent } from "../generated/apolloComponents";
+import {
+  LoginComponent,
+  MeQuery,
+  MeDocument
+} from "../generated/apolloComponents";
 import { InputField } from "../components/field/InputField";
 
 export default class login extends Component {
@@ -43,7 +47,21 @@ export default class login extends Component {
                       }}
                       onSubmit={async (data, { setErrors }) => {
                         const response = await login({
-                          variables: data
+                          variables: data,
+                          // actualizamos el cache de apolloClient
+                          update: (cache, { data }) => {
+                            if (!data || !data.login) {
+                              return;
+                            }
+
+                            cache.writeQuery<MeQuery>({
+                              query: MeDocument,
+                              data: {
+                                __typename: "Query",
+                                me: data.login
+                              }
+                            });
+                          }
                         });
                         console.log(response);
                         if (response && response.data && !response.data.login) {

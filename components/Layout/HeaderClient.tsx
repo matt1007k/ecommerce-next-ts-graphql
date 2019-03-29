@@ -7,11 +7,11 @@ import {
   Nav,
   NavItem,
   NavLink,
-  Badge,
-  Button
+  Badge
 } from "reactstrap";
 
 import { MdSearch, MdShoppingBasket } from "react-icons/md";
+import { MeComponent } from "../../generated/apolloComponents";
 
 interface Props {}
 
@@ -59,6 +59,20 @@ class HeaderClient extends PureComponent<Props, State> {
                   <MdSearch size={25} />
                 </NavLink>
               </NavItem>
+              {/* <MeComponent>
+                {({ data, loading }) => {
+                  if (!data || loading || !data.me) {
+                    return null;
+                  }
+                  return (
+                    <NavItem>
+                      <Link href="/logout" passHref>
+                        <NavLink>Logout</NavLink>
+                      </Link>
+                    </NavItem>
+                  );
+                }}
+              </MeComponent> */}
               <NavItem>
                 <Link href="/login" passHref>
                   <NavLink>Login</NavLink>
