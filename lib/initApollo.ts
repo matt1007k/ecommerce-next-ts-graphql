@@ -8,6 +8,9 @@ import { setContext } from "apollo-link-context";
 import fetch from "isomorphic-unfetch";
 import { isBrowser } from "./isBrowser";
 
+import { onError } from "apollo-link-error";
+import Router from "next/router";
+
 let apolloClient: ApolloClient<NormalizedCacheObject> | null = null;
 
 // Polyfill fetch() on the server (used by apollo-client)
@@ -25,6 +28,21 @@ function create(initialState: any, { getToken }: Options) {
     credentials: "include"
   });
 
+  const errorLink = onError(({ graphQLErrors, networkError }) => {
+    if (graphQLErrors)
+      graphQLErrors.map(({ message, locations, path }) => {
+        console.log(
+          `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+        );
+
+        // Define error un authenticated
+        if (isBrowser && message.includes("Not authenticated")) {
+          Router.replace("/login");
+        }
+      });
+    if (networkError) console.log(`[Network error]: ${networkError}`);
+  });
+
   const authLink = setContext((_, { headers }) => {
     const token = getToken();
     return {
@@ -39,7 +57,7 @@ function create(initialState: any, { getToken }: Options) {
   return new ApolloClient({
     connectToDevTools: isBrowser,
     ssrMode: !isBrowser, // Disables forceFetch on the server (so queries are only run once)
-    link: authLink.concat(httpLink),
+    link: errorLink.concat(authLink.concat(httpLink)),
     cache: new InMemoryCache().restore(initialState || {})
   });
 }

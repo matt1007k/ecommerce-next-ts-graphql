@@ -87,6 +87,15 @@ export type ConfirmUserMutation = { __typename?: "Mutation" } & Pick<
   "confirmUser"
 >;
 
+export type ForgotPasswordMutationVariables = {
+  email: Scalars["String"];
+};
+
+export type ForgotPasswordMutation = { __typename?: "Mutation" } & Pick<
+  Mutation,
+  "forgotPassword"
+>;
+
 export type LoginMutationVariables = {
   email: Scalars["String"];
   password: Scalars["String"];
@@ -109,6 +118,17 @@ export type RegisterMutation = { __typename?: "Mutation" } & {
   register: { __typename?: "User" } & Pick<
     User,
     "id" | "firstName" | "lastName" | "email" | "name"
+  >;
+};
+
+export type MeQueryVariables = {};
+
+export type MeQuery = { __typename?: "Query" } & {
+  me: Maybe<
+    { __typename?: "User" } & Pick<
+      User,
+      "id" | "firstName" | "lastName" | "email" | "name"
+    >
   >;
 };
 
@@ -160,6 +180,60 @@ export function withConfirmUser<TProps, TChildProps = {}>(
     ConfirmUserMutationVariables,
     ConfirmUserProps<TChildProps>
   >(ConfirmUserDocument, operationOptions);
+}
+export const ForgotPasswordDocument = gql`
+  mutation forgotPassword($email: String!) {
+    forgotPassword(email: $email)
+  }
+`;
+
+export class ForgotPasswordComponent extends React.Component<
+  Partial<
+    ReactApollo.MutationProps<
+      ForgotPasswordMutation,
+      ForgotPasswordMutationVariables
+    >
+  >
+> {
+  render() {
+    return (
+      <ReactApollo.Mutation<
+        ForgotPasswordMutation,
+        ForgotPasswordMutationVariables
+      >
+        mutation={ForgotPasswordDocument}
+        {...(this as any)["props"] as any}
+      />
+    );
+  }
+}
+export type ForgotPasswordProps<TChildProps = {}> = Partial<
+  ReactApollo.MutateProps<
+    ForgotPasswordMutation,
+    ForgotPasswordMutationVariables
+  >
+> &
+  TChildProps;
+export type ForgotPasswordMutationFn = ReactApollo.MutationFn<
+  ForgotPasswordMutation,
+  ForgotPasswordMutationVariables
+>;
+export function withForgotPassword<TProps, TChildProps = {}>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        ForgotPasswordMutation,
+        ForgotPasswordMutationVariables,
+        ForgotPasswordProps<TChildProps>
+      >
+    | undefined
+) {
+  return ReactApollo.withMutation<
+    TProps,
+    ForgotPasswordMutation,
+    ForgotPasswordMutationVariables,
+    ForgotPasswordProps<TChildProps>
+  >(ForgotPasswordDocument, operationOptions);
 }
 export const LoginDocument = gql`
   mutation Login($email: String!, $password: String!) {
@@ -260,4 +334,49 @@ export function withRegister<TProps, TChildProps = {}>(
     RegisterMutationVariables,
     RegisterProps<TChildProps>
   >(RegisterDocument, operationOptions);
+}
+export const MeDocument = gql`
+  query Me {
+    me {
+      id
+      firstName
+      lastName
+      email
+      name
+    }
+  }
+`;
+
+export class MeComponent extends React.Component<
+  Partial<ReactApollo.QueryProps<MeQuery, MeQueryVariables>>
+> {
+  render() {
+    return (
+      <ReactApollo.Query<MeQuery, MeQueryVariables>
+        query={MeDocument}
+        {...(this as any)["props"] as any}
+      />
+    );
+  }
+}
+export type MeProps<TChildProps = {}> = Partial<
+  ReactApollo.DataProps<MeQuery, MeQueryVariables>
+> &
+  TChildProps;
+export function withMe<TProps, TChildProps = {}>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        MeQuery,
+        MeQueryVariables,
+        MeProps<TChildProps>
+      >
+    | undefined
+) {
+  return ReactApollo.withQuery<
+    TProps,
+    MeQuery,
+    MeQueryVariables,
+    MeProps<TChildProps>
+  >(MeDocument, operationOptions);
 }
