@@ -11,8 +11,12 @@ $body-color: #111;
 @import "./components/header-client";
 @import "./components/aside-client";
 
+@import "./components/admin-layout";
+
 @import "./components/animations/slider-horizontal";
 @import "./components/animations/slider-animation";
 @import "./components/animations/slider";
 
 @import "./components/utils/helpers";
+
+@import "./components/pages/banner-home";

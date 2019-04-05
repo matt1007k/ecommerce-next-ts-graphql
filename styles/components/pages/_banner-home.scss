@@ -1,0 +1,31 @@
+.cl-banner__home {
+  .banner__main {
+    position: relative;
+    // width: 100%;
+    // height: 300px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    .bm__actions {
+      position: absolute;
+      padding-left: 40px;
+      padding-bottom: 40px;
+      max-height: 300px;
+    }
+  }
+  .bm__sc {
+    cursor: pointer;
+    height: 180px;
+    &::after:hover {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+  }
+  .banner__sc {
+    cursor: pointer;
+    height: 180px;
+    background-color: #c2c2c2;
+  }
+}

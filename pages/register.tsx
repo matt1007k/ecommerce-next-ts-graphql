@@ -24,7 +24,7 @@ export default class register extends Component {
   render() {
     return (
       <Layout title="Crear una cuenta">
-        <BreadcrumPage title="Sign Up" />
+        <BreadcrumPage title="Sign Up" layout="client" />
         <Row className="h-100 d-flex justify-content-center align-items-center">
           <Col md={6}>
             <Card className="mt-2">

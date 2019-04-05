@@ -5,14 +5,22 @@ import Link from "next/link";
 
 interface Props {
   title: string;
+  layout: string;
 }
 
-const BreadcrumPage: React.FC<Props> = ({ title }) => {
+const BreadcrumPage: React.FC<Props> = ({ title, layout }) => {
   return (
     <Breadcrumb tag="nav" listTag="div">
-      <Link href="/" passHref>
-        <BreadcrumbItem tag="a">Home</BreadcrumbItem>
-      </Link>
+      {layout === "client" ? (
+        <Link href="/" passHref>
+          <BreadcrumbItem tag="a">Home</BreadcrumbItem>
+        </Link>
+      ) : (
+        <Link href="/admin" passHref>
+          <BreadcrumbItem tag="a">Home</BreadcrumbItem>
+        </Link>
+      )}
+
       <BreadcrumbItem active tag="span">
         {title}
       </BreadcrumbItem>

@@ -4,7 +4,7 @@ import Head from "next/head";
 import "../../styles/main.scss";
 import HeaderClient from "./HeaderClient";
 
-import { Container, Row, Col } from "reactstrap";
+import { Container } from "reactstrap";
 
 type Props = {
   title?: string;

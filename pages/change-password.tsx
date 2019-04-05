@@ -24,7 +24,7 @@ import { NextContext } from "next";
 const changePassword = ({ token }: { token: string }) => {
   return (
     <Layout title="Change password">
-      <BreadcrumPage title="Sign Up" />
+      <BreadcrumPage title="Change Password" layout="client" />
       <Row className="h-100 d-flex justify-content-center align-items-center">
         <Col md={6}>
           <Card className="mt-2">

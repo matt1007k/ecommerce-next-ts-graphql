@@ -1,26 +1,27 @@
 import React, { PureComponent } from "react";
-import Layout from "../../components/Layout/Layout";
 import { MeComponent } from "../../generated/apolloComponents";
-import { NavLink, NavItem } from "reactstrap";
 import Link from "next/link";
+import LayoutAdmin from "../../components/Layout/LayoutAdmin";
 
 export class AdminPage extends PureComponent {
   render() {
     return (
-      <Layout title="Dashboard page">
+      <LayoutAdmin title="Dashboard page">
         <MeComponent>
           {({ data }) => (
             <div>
-              {data && data.me ? `Hello ${data.me.firstName}` : "Loading..."}
-              <NavItem>
+              <p>
+                {data && data.me ? `Hello ${data.me.firstName}` : "Loading..."}
+              </p>
+              <div>
                 <Link href="/logout" passHref>
-                  <NavLink>Logout</NavLink>
+                  <a>Logout</a>
                 </Link>
-              </NavItem>
+              </div>
             </div>
           )}
         </MeComponent>
-      </Layout>
+      </LayoutAdmin>
     );
   }
 }

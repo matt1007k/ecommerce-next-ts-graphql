@@ -24,7 +24,7 @@ export default class forgotPassword extends Component {
   render() {
     return (
       <Layout title="Forgot password">
-        <BreadcrumPage title="Sign Up" />
+        <BreadcrumPage title="Forgot password" layout="client" />
         <Row className="h-100 d-flex justify-content-center align-items-center">
           <Col md={6}>
             <Card className="mt-2">
